@@ -1,0 +1,51 @@
+{
+  "artist": "Unknown Artist",
+  "album": "Mickey J. Meyer - Seethamma Vakitlo Sirimalle Chettu",
+  "year": 2026,
+  "releaseTag": "svsc-2013",
+  "cover": "cover.jpg",
+  "tracks": [
+    {
+      "track": 1,
+      "file": "01.-.Sitamma.Vakitlo.-.Chitra.m4a",
+      "title": "Sitamma Vakitlo",
+      "singers": "Chitra"
+    },
+    {
+      "track": 2,
+      "file": "02.-.Aaraduguluntada.-.KALYANI.m4a",
+      "title": "Aaraduguluntada",
+      "singers": "KALYANI"
+    },
+    {
+      "track": 3,
+      "file": "03.-.Vaana.Chinukulu.-.Karthik.Anjana.Sowmya.m4a",
+      "title": "Vaana Chinukulu",
+      "singers": "Karthik Anjana Sowmya"
+    },
+    {
+      "track": 4,
+      "file": "04.-.Inka.Cheppale.-.Rahul.Nambiar.Swetha.Pandit.m4a",
+      "title": "Inka Cheppale",
+      "singers": "Rahul Nambiar Swetha Pandit"
+    },
+    {
+      "track": 5,
+      "file": "05.-.Meghaallo.-.Karthik.Sri.Rama.Chandra.m4a",
+      "title": "Meghaallo",
+      "singers": "Karthik Sri Rama Chandra"
+    },
+    {
+      "track": 6,
+      "file": "06.-.Yemcheddam.-.Ranjith.Sri.Rama.Chandra.Karthik.m4a",
+      "title": "Yemcheddam",
+      "singers": "Ranjith Sri Rama Chandra Karthik"
+    },
+    {
+      "track": 7,
+      "file": "07.-.Mari.Antaga.-.Sri.Rama.Chandra.m4a",
+      "title": "Mari Antaga",
+      "singers": "Sri Rama Chandra"
+    }
+  ]
+}

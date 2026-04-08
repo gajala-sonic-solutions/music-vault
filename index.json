@@ -1,11 +1,11 @@
 {
   "albums": [
     {
-      "id": "dhurandhar",
-      "artist": "Shashwat Sachdev",
-      "title": "Dhurandhar",
-      "year": 2025,
-      "cover": "https://github.com/Bharadwaja1557/music-vault/releases/download/dhurandhar/cover.jpg"
+      "id": "svsc-2013",
+      "artist": "Unknown Artist",
+      "title": "Mickey J. Meyer - Seethamma Vakitlo Sirimalle Chettu",
+      "year": 2026,
+      "cover": "https://github.com/gajala-sonic-solutions/music-vault/releases/download/svsc-2013/cover.jpg"
     }
   ]
 }
