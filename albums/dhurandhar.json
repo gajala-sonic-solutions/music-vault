@@ -1,0 +1,10 @@
+{
+  "artist": "Shashwat Sachdev",
+  "album": "Dhurandhar",
+  "year": 2025,
+  "releaseTag": "dhurandhar",
+  "tracks": [
+    { "track": 1, "file": "01.-.Title.Track.m4a" },
+    { "track": 2, "file": "02.-.Run.Down.The.City.-.Monica.m4a" }
+  ]
+}
