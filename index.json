@@ -1,0 +1,11 @@
+{
+  "albums": [
+    {
+      "id": "dhurandhar",
+      "artist": "Shashwat Sachdev",
+      "title": "Dhurandhar",
+      "year": 2025,
+      "cover": "https://github.com/Bharadwaja1557/music-vault/releases/download/dhurandhar/cover.jpg"
+    }
+  ]
+}
