@@ -5,6 +5,11 @@ on:
     types: [published, edited, deleted]
   workflow_dispatch:
 
+# Prevent two runs from colliding on the same branch
+concurrency:
+  group: generate-index
+  cancel-in-progress: false   # don't cancel — queue instead
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -38,9 +43,15 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add index.json albums/
+
           if git diff --staged --quiet; then
             echo "No changes to commit."
-          else
-            git commit -m "chore: auto-update index for release [skip ci]"
-            git push origin main
+            exit 0
           fi
+
+          git commit -m "chore: auto-update index for release [skip ci]"
+
+          # Pull any changes that landed between our checkout and now,
+          # then push. Retry once if the push still fails.
+          git pull --rebase origin main
+          git push origin main || (git pull --rebase origin main && git push origin main)
