@@ -1,0 +1,51 @@
+{
+  "artist": "Unknown Artist",
+  "album": "Manam",
+  "year": 2014,
+  "releaseTag": "manam-2014",
+  "cover": "cover.webp",
+  "tracks": [
+    {
+      "track": 1,
+      "file": "01.--.Piyo.Piyo.Re.--.Jaspreet.Jasz.Anoop.Rubens.Megh.Raj.Rahul.m4a",
+      "flac": "01.--.Piyo.Piyo.Re.--.Jaspreet.Jasz.Anoop.Rubens.Megh.Raj.Rahul.flac",
+      "title": "Piyo Piyo Re",
+      "singers": "Jaspreet Jasz Anoop Rubens Megh Raj Rahul"
+    },
+    {
+      "track": 2,
+      "file": "02.--.Kani.Penchina.Ma.Ammake.--.Bharath.m4a",
+      "flac": "02.--.Kani.Penchina.Ma.Ammake.--.Bharath.flac",
+      "title": "Kani Penchina Ma Ammake",
+      "singers": "Bharath"
+    },
+    {
+      "track": 3,
+      "file": "03.--.Edhi.Prema.--.Haricharan.m4a",
+      "flac": "03.--.Edhi.Prema.--.Haricharan.flac",
+      "title": "Edhi Prema",
+      "singers": "Haricharan"
+    },
+    {
+      "track": 4,
+      "file": "04.--.Chinni.Chinni.Aasalu.--.Shreya.Ghoshal.Ashwin.Hari.m4a",
+      "flac": "04.--.Chinni.Chinni.Aasalu.--.Shreya.Ghoshal.Ashwin.Hari.flac",
+      "title": "Chinni Chinni Aasalu",
+      "singers": "Shreya Ghoshal Ashwin Hari"
+    },
+    {
+      "track": 5,
+      "file": "05.--.Manam.Theme.Music.--.Anoop.Rubens.m4a",
+      "flac": "05.--.Manam.Theme.Music.--.Anoop.Rubens.flac",
+      "title": "Manam Theme Music",
+      "singers": "Anoop Rubens"
+    },
+    {
+      "track": 6,
+      "file": "06.--.Kanulanu.Thaake.--.Arijit.Singh.m4a",
+      "flac": "06.--.Kanulanu.Thaake.--.Arijit.Singh.flac",
+      "title": "Kanulanu Thaake",
+      "singers": "Arijit Singh"
+    }
+  ]
+}

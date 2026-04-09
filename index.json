@@ -1,6 +1,13 @@
 {
   "albums": [
     {
+      "id": "manam-2014",
+      "artist": "Unknown Artist",
+      "title": "Manam",
+      "year": 2014,
+      "cover": "https://github.com/gajala-sonic-solutions/music-vault/releases/download/manam-2014/cover.webp"
+    },
+    {
       "id": "svsc-2013",
       "artist": "Unknown Artist",
       "title": "Seethamma Vakitlo Sirimalle Chettu",
