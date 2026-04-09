@@ -46,6 +46,9 @@ const GH_TOKEN  = process.env.GH_TOKEN;
 const [OWNER, REPO_NAME] = REPO.split('/');
 
 const AUDIO_EXTS  = new Set(['.m4a', '.mp3', '.flac', '.wav', '.ogg', '.aac', '.opus', '.m4b']);
+// Files to separate into their own arrays for pairing
+const M4A_EXTS   = new Set(['.m4a', '.aac', '.mp3', '.ogg', '.opus', '.wav', '.m4b']);
+const FLAC_EXTS  = new Set(['.flac']);
 const COVER_NAMES = new Set(['cover.jpg', 'cover.jpeg', 'cover.png', 'cover.webp']);
 
 const ALBUMS_DIR = path.join(__dirname, '../../albums');
@@ -185,21 +188,33 @@ function classifyAssets(assets) {
 // ── Song filename parser ─────────────────────────────────────
 
 /**
- * Parse "01.-.Song.Name.-.Singer1,.Singer2.m4a"
- * into { title: "Song Name", singers: "Singer1, Singer2" }
- *
- * New naming convention: TRACK - TITLE - SINGERS.ext
- * Old convention (no singers): TRACK - TITLE.ext
+ * v2 format: "01.--.Song.Name.--.Singer.1.&.Singer.2.m4a"
+ *   → { title: "Song Name", singers: ["Singer 1", "Singer 2"] }
+ * v1 legacy: "01.-.Song.Name.-.Singer.m4a"
+ *   → { title: "Song Name", singers: ["Singer"] }
  */
 function parseSongFilename(filename) {
-  let name = filename.replace(/\.[^.]+$/, '');
-  const parts = name.split(/\.-\./).map(p => p.replace(/\./g, ' ').trim());
-  if (parts.length <= 1) return { title: name.replace(/^\d{1,3}\s*/, '').trim(), singers: '' };
-  const hasNum = /^\d{1,3}$/.test(parts[0]);
-  if (hasNum) {
-    return { title: parts[1] || '', singers: parts.slice(2).join(' - ') };
+  const name = filename.replace(/\.[^.]+$/, '');
+
+  if (name.includes('.--.')){
+    const parts = name.split(/\.--\./).map(p => p.replace(/\./g, ' ').trim());
+    const hasNum = /^\d{1,3}$/.test(parts[0]);
+    const titleIdx  = hasNum ? 1 : 0;
+    const singersRaw = hasNum ? parts.slice(2) : parts.slice(1);
+    const title   = parts[titleIdx] || '';
+    const singers = singersRaw.length > 0
+      ? singersRaw.join(' ').split(/\s*&\s*/).map(s => s.trim()).filter(Boolean)
+      : [];
+    return { title, singers };
   }
-  return { title: parts[0], singers: parts.slice(1).join(' - ') };
+
+  // v1 legacy
+  const parts = name.split(/\.-\./).map(p => p.replace(/\./g, ' ').trim());
+  if (parts.length <= 1) return { title: parts[0].replace(/^\d{1,3}\s*-?\s*/, '').trim(), singers: [] };
+  const hasNum = /^\d{1,3}$/.test(parts[0]);
+  if (parts.length === 2) return { title: hasNum ? parts[1] : parts[0], singers: [] };
+  if (hasNum) return { title: parts.slice(1, -1).join(' - '), singers: [parts[parts.length - 1]] };
+  return { title: parts[0], singers: parts.slice(1) };
 }
 
 // ── Build album JSON ─────────────────────────────────────────
@@ -213,14 +228,28 @@ function buildAlbumJson(release, meta, tracks, cover) {
   const albumTitle = parsed.album  || release.name  || releaseTag;
   const year       = meta.year     || parsed.year   || new Date(release.published_at).getFullYear();
 
-  const trackList = tracks
+  // Pair M4A and FLAC files by track number
+  const m4aFiles  = tracks.filter(f => /\.m4a$/i.test(f));
+  const flacFiles = tracks.filter(f => /\.flac$/i.test(f));
+
+  // Build a map: trackNum → flac filename
+  const flacByNum = {};
+  flacFiles.forEach(f => {
+    const num = extractTrackNum(f, null);
+    if (num !== null) flacByNum[num] = f;
+  });
+
+  const trackList = m4aFiles
     .map((filename, i) => {
-      const parsed = parseSongFilename(filename);
+      const parsed  = parseSongFilename(filename);
+      const trackNum = extractTrackNum(filename, i + 1);
+      const flacFile = flacByNum[trackNum] || null;
       return {
-        track:   extractTrackNum(filename, i + 1),
+        track:   trackNum,
         file:    filename,
+        flac:    flacFile,               // null if no FLAC uploaded
         title:   parsed.title,
-        singers: parsed.singers || '',
+        singers: parsed.singers.join(' & '),  // store as string, & separated
       };
     })
     .sort((a, b) => a.track - b.track);
